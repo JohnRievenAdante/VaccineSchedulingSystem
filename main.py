@@ -1,14 +1,31 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, url_for, render_template
 
 app = Flask(__name__)
 
-@app.route('/', methods = ['GET'])
-def main_homepage():
-    return render_template("home.html")
+@app.route ("/")
 
-@app.route('/otherpage', methods = ['POST'])
-def otherpage():
-    return render_template("otherpage.html")
+def Home():
+    return render_template("Home.html", content="Test")
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+@app.route ("/ScheduleAppointment")
+
+def ScheduleAppointment():
+    return render_template("ScheduleAppointment.html", content="Test")
+
+@app.route ("/ViewAppointment")
+
+def ViewAppointment():
+    return render_template("ViewAppointment.html", content="Test")
+
+@app.route ("/Login")
+
+def Login():
+    return render_template("Login.html", content="Test")
+
+@app.route ("/Register")
+
+def Register():
+    return render_template("Register.html", content="Test")
+
+if __name__ == "__main__":
+    app.run(debug=True)
