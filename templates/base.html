@@ -22,31 +22,34 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">COVID-19 Vaccine Scheduling System</span>
-              <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="{{ url_for('Home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('ScheduleAppointment') }}">Schedule Appointment</a>
-                    </li>
-                      <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('ViewAppointment') }}">View Appointment</a>
-                    </li>
-                      <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('Login') }}">Login</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-            {% block content %}
-            {% endblock %}
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <!-- Brand -->
+      <span class="navbar-brand mb-0 h1">COVID-19 Vaccine Scheduling System</span>
+
+      <!-- Toggler Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('Home') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('ScheduleAppointment') }}">Schedule Appointment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('ViewAppointment') }}">View Appointment</a>
+          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('Login') }}">Login</a>
+            </li>
+        </ul>
+      </div>
+    </nav>
+        {% block content %}
+        {% endblock %}
 </body>
 </html>
