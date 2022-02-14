@@ -10,7 +10,6 @@ from wtforms.validators import ValidationError
 def Home():
     return render_template("Home.html", content="Test")
 
-
 @app.route ("/ScheduleAppointment")
 def ScheduleAppointment():
     return render_template("ScheduleAppointment.html", content="Test")
