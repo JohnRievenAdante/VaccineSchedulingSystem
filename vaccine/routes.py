@@ -18,7 +18,6 @@ def ScheduleAppointment():
 def ViewAppointment():
     return render_template("ViewAppointment.html", content="Test")
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
