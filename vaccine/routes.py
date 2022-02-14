@@ -71,8 +71,6 @@ def index():
             print(i.h," hos")
             print(i.v," vac")
             s.append(i.v)
-
-    
     return render_template('index.html',s=s)
 
 @app.route('/register', methods=['GET','POST'])
