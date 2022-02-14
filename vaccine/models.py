@@ -1,4 +1,4 @@
-from vaccine import db
+from vaccine import db#, bcrypt
 
 from flask_login import UserMixin
 
@@ -13,6 +13,17 @@ class user_information(db.Model):
     contact_number=db.Column(db.String(length=45))
     email_address=db.Column(db.String(length=45))
     pwd=db.Column(db.String(length=45))
+
+    #@property
+    #def password(self):
+    #    return self.password
+
+    #@password.setter
+    #def password(self, plain_text_password):
+    #    self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+
+    #def check_password_correction(self, attempted_password):
+    #    return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
     def __repr__(self):
         return "id: {0} | first name: {1} | middle name: {2} | last name: {3} | city: {4} | home address: {5} | email address: {6} | password: {7} | contact number: {8} | birth date: {9}".format(self.user_id,self.first_name,self.middle_name,self.last_name,self.city,self.home_address,self.email_address,self.pwd,self.contact_number,self.birth_date,)
@@ -37,7 +48,6 @@ class vaccine(db.Model):
     vaccine_id=db.Column(db.Integer,primary_key=True)
     vaccine_name=db.Column(db.String(length=255))
 
-    vaccine_hos=db.Column(db.Integer(),db.ForeignKey('hospital.hosp_id'))
     schedules = db.relationship('avail', backref='all_schedules', lazy=True)
     #following = db.relationship('hospital',secondary=connector,backref='followers')
     availability_details = db.relationship("availability_details", back_populates="v")

@@ -7,29 +7,16 @@ from vaccine.forms import RegisterForm,LoginForm, UpdateVaccineForm, AddVaccineF
 from wtforms.validators import ValidationError
 
 @app.route ("/")
-
 def Home():
     return render_template("Home.html", content="Test")
 
 @app.route ("/ScheduleAppointment")
-
 def ScheduleAppointment():
     return render_template("ScheduleAppointment.html", content="Test")
 
 @app.route ("/ViewAppointment")
-
 def ViewAppointment():
     return render_template("ViewAppointment.html", content="Test")
-
-@app.route ("/Login")
-
-def Login():
-    return render_template("Login.html", content="Test")
-
-@app.route ("/Register")
-
-def Register():
-    return render_template("Register.html", content="Test")
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -41,22 +28,26 @@ def login():
         if attempted_user:
             
             flash(f'Success! You are logged in as: {attempted_user.email_address}', category='success')
-            return redirect(url_for('index'))
-        else:
-            flash('Username and password do not match! Please try again', category='danger')
-    return render_template('login_copy.html',form=form)
+            return redirect(url_for('ViewAppointment'))
+    if form.errors != {}: 
+        flash('Incorrect Email or Passowrd, Try Again', category='danger')
 
-@app.route('/adminlogin')
+    return render_template('login.html',form=form)
+
+@app.route('/adminlogin', methods=['GET', 'POST'])
 def adminlogin():
     form = AdminLoginForm()
+    
     if form.validate_on_submit():
-        attempted_user = hospital.query.filter_by(hospital_name=form.hosname.data).first()
+        
+        attempted_user = hospital.query.filter_by(hosp_name=form.hosname.data).first()
         if attempted_user:
             
-            flash(f'Success! You are logged in as: {attempted_user.email_address}', category='success')
+            flash(f'Success! You are logged in as: {attempted_user.hosp_name}', category='success')
             return redirect(url_for('index'))
-        else:
-            flash('Username and password are not match! Please try again', category='danger')
+
+    if form.errors != {}: 
+        flash('Incorrect Name or Password, Try Again', category='danger')
     return render_template('login_admin.html',form=form)
 
 @app.route('/update')
@@ -91,20 +82,20 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         
-        email_address = user_information.query.filter_by(email_address=form.emailadd.data).first()
-        if email_address:
-            raise ValidationError('Email Address already exists! Please try a different email address')
+        #email_address = user_information.query.filter_by(email_address=form.email_address.data).first()
+        #if email_address:
+        #    raise ValidationError('Email Address already exists! Please try a different email address')
         user=user_information(first_name=form.first_name.data,middle_name=form.middle_name.data,last_name=form.last_name.data,
-        city=form.city.data,home_address=form.home_address.data,email_address=form.email_address.data,pwd=form.password1.data,
+        city=form.city.data,home_address=form.home_address.data,email_address=form.email_address.data,pwd=form.password.data,
         contact_number=form.contact_number.data,birthdate=form.birthdate.data)
         db.session.add(user)
         db.session.commit()
     
         flash(f'Success! You are registered', category='success')
-    if register.errors != {}: 
-        for err_msg in register.errors.values():
+    if form.errors != {}: 
+        for err_msg in form.errors.values():
             flash(f'There was an error with creating a user: {err_msg}', category='danger')
-    return render_template('register_copy.html',form=form)
+    return render_template('register.html',form=form)
 
 @app.route('/logout')
 def logout_page():
