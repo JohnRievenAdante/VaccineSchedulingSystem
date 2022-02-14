@@ -1,0 +1,102 @@
+{% extends 'base_admin.html' %}
+{% block title %}
+List of Vaccines
+{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top:20px; margin-left:20px">
+    <div class="col-8">
+        <div class="container mt-5 mb-5" method="POST">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <header class="card-header">
+                            <h4 class="card-title mt-2">Update Vaccine</h4>
+                        </header>
+                        <article class="card-body">
+                            <div class="form-row mt-3">
+                                <div class="col form-group">
+                                    <h6 class="card-text">Hospital Name:</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ form.hospitalname(class="form-control", placeholder="Hospital Name") }}
+                                        </div>
+                                    </div>
+                                    <h6 class="card-text">Vaccine Name:</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ form.vaccinename(class="form-control", placeholder="Vaccine Name") }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row mt-3">
+                                <div class="col form-group">
+                                    <h6 class="card-text">Vaccine Date:</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ form.vaccinedate(class="form-control", placeholder="Vaccine Date") }}
+                                        </div>
+                                        <div class="col">
+                                        </div>
+                                        <div class="col">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row mt-3">
+                                <div class="col form-group">
+                                    <h6 class="card-text">Vaccine Time:</h6>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ form.time1(class="form-control") }}
+                                        </div>
+                                        <div class="col">
+                                            {{ form.ampm1(class="form-control") }}
+                                        </div>To
+                                        <div class="col">
+                                            {{ form.time2(class="form-control") }}
+                                        </div>
+                                        <div class="col">
+                                            {{ form.ampm2(class="form-control") }}
+                                        </div>
+                                    </div>   
+                                </div>     
+                            </div>
+                            {{ form.addtime(class="btn btn-lg btn-block btn-primary") }}
+                    </div>
+                        &nbsp;
+                        <div class="d-grid gap-2">
+                            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <h2>All Schedules</h2>
+        <p>Add Schedules for Vaccine</p>
+        <br>
+        <div class="row">
+           {% for sched in s %}
+           
+             <div class="col-md-6">
+                 <div style="margin-bottom: 5px" class="card text-center">
+                      <div class="card-body">
+                          <h5 class="card-title">{{ sched.availability_date }}</h5>
+                          <h5 class="card-title">{{ sched.availability_time }}</h5>
+                          <p class="card-text"><strong>
+                              
+                          </strong></p>
+                      </div>
+                  </div>
+             </div>
+           {% endfor %}
+        </div>
+   </div>
+</div>
+
+{% endblock %}
