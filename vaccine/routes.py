@@ -75,7 +75,6 @@ def index():
     
     return render_template('index.html',s=s)
 
-
 @app.route('/register', methods=['GET','POST'])
 def register():
     form = RegisterForm()
